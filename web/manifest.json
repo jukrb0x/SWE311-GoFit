@@ -1,6 +1,6 @@
 {
-    "name": "stayhealthy",
-    "short_name": "stayhealthy",
+    "name": "gofit",
+    "short_name": "gofit",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

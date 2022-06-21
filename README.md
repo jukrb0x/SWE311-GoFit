@@ -1,4 +1,4 @@
-# stayhealthy
+# gofit
 
 Stay Healthy
 

@@ -1,4 +1,4 @@
-package com.jb.stayhealthy;
+package com.jb.gofit.activity;
 
 public class DatabaseActivity {
 }

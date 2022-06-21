@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  // app entry
   runApp(const MyApp());
 }
 
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Go Fit'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -31,7 +33,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static const platform = MethodChannel('com.jb.gofit/test');
+  List _userList = [];
   int _counter = 0;
+
+  Future<void> _getUserList() async {
+    final List<dynamic> result = await platform.invokeMethod('getUserList');
+    setState(() {
+      _userList = result;
+    });
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -52,18 +63,21 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            // Text(
+            //   '$_counter',
+            //   style: Theme.of(context).textTheme.headline4,
+            // ),
+            Text('$_userList'),
+            Text('$_counter')
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {_getUserList();_incrementCounter();},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
   }
 }
+
