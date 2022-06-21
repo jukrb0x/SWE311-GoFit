@@ -34,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   static const platform = MethodChannel('com.jb.gofit/test');
-  List _userList = [];
+  List _userList = ["default"];
   int _counter = 0;
 
   Future<void> _getUserList() async {
@@ -48,6 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
+  }
+  
+  Future<void> _addTestUser() async {
+    await platform.invokeListMethod('addUserTest');
+  }
+  
+  Future<void> _clearDatabase() async {
+    await platform.invokeListMethod('clearDatabase');
   }
 
   @override
@@ -68,7 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
             //   style: Theme.of(context).textTheme.headline4,
             // ),
             Text('$_userList'),
-            Text('$_counter')
+            Text('$_counter'),
+            ElevatedButton(onPressed: _addTestUser, child: const Text("Add test user")),
+            ElevatedButton(onPressed: _clearDatabase, child:const Text("Clear DB") )
           ],
         ),
       ),

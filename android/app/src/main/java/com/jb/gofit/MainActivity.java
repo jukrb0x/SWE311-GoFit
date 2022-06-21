@@ -1,12 +1,18 @@
 package com.jb.gofit;
 
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.Room;
 
 import com.jb.gofit.dao.UserDao;
 import com.jb.gofit.database.AppDatabase;
 import com.jb.gofit.entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.flutter.embedding.android.FlutterActivity;
@@ -16,6 +22,22 @@ import io.flutter.plugin.common.MethodChannel;
 // we need channel to connect flutter and native java
 public class MainActivity extends FlutterActivity {
     private static final String CHANNEL = "com.jb.gofit/test";
+    AppDatabase db;
+    List<User> userList;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        db = AppDatabase.getInstance(this.getApplication());
+    }
+
+    private void addUser(){
+        UserDao userDao = db.userDao();
+        User testUser = new User();
+        testUser.setFirstName("John");
+        testUser.setLastName("Sena");
+        userDao.insertAll(testUser);
+    }
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
@@ -24,16 +46,27 @@ public class MainActivity extends FlutterActivity {
                 .setMethodCallHandler(
                         (call, result) -> {
                             // This method is invoked on the main thread.
-                            // TODO
+                            if (call.method.equals("getUserList")) {
+                                UserDao userDao = db.userDao();
+
+                                List<String> userList = new ArrayList<>();
+                                for (User user: userDao.getAll()) {
+                                    userList.add(user.getFirstName());
+                                }
+//                                userList = userDao.getAll().forEach(i -> userList.add(i));
+                                Log.i("APP", String.valueOf(userList));
+                                Log.i("APP", "Created.");
+                                result.success(userList);
+                            }
+
+                            if(call.method.equals("addUserTest")){
+                                Log.i("APP", "add user test.");
+                                addUser();
+                            }
+
                         }
                 );
     }
-
-    // db test
-    AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "user-database").build();
-
-    UserDao userDao = db.userDao();
-    List<User> userList = userDao.getAll();
 
 
 }
