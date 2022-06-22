@@ -1,5 +1,6 @@
 package com.jb.gofit;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -44,6 +45,7 @@ public class MainActivity extends FlutterActivity {
         userDao.insertAll(testUser);
     }
 
+    @SuppressLint("WrongThread") // this is bad bad
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
