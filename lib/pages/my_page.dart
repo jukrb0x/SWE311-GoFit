@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:GoFit/widgets/setting_item.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return getWidget();
+    return getMaterialAppWidget();
   }
 }
 
-MaterialApp getWidget() {
+MaterialApp getMaterialAppWidget() {
   return MaterialApp(
     theme: ThemeData(
       primarySwatch: Colors.indigo,
@@ -21,7 +22,6 @@ MaterialApp getWidget() {
     debugShowCheckedModeBanner: false,
   );
 }
-
 
 class MyPageView extends StatefulWidget {
   const MyPageView({Key? key, required this.title}) : super(key: key);
@@ -37,7 +37,7 @@ class _MyPageViewState extends State<MyPageView> {
   static const platform = MethodChannel('com.jb.gofit/test');
   List _userList = ["default"];
 
-
+  /// start
   Future<void> _getUserList() async {
     final List<dynamic> result = await platform.invokeMethod('getUserList');
     setState(() {
@@ -54,6 +54,8 @@ class _MyPageViewState extends State<MyPageView> {
     print("clear database");
   }
 
+  /// end
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,32 +64,95 @@ class _MyPageViewState extends State<MyPageView> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: const <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 10, left: 2, right: 2),
             ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headline4,
-            // ),
-            Text('$_userList'),
-            ElevatedButton(onPressed: _addTestUser, child: const Text("Add test user")),
-            ElevatedButton(onPressed: _getUserList, child:const Text("Show DB") ),
-
-
+            _MyItem(
+              iconData: Icons.login,
+              iconColor: Colors.blue,
+              title: 'Login',
+            ),
+            Divider(),
+            _MyItem(
+              iconData: Icons.app_registration,
+              iconColor: Colors.orange,
+              title: '消息中心',
+            ),
+            Divider(),
           ],
+
         ),
       ),
-      // test code
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _clearDatabase();
-        },
-        tooltip: 'Clear Database',
-        child: const Icon(Icons.cleaning_services),
+    );
+  }
+}
+
+SliverToBoxAdapter _personItem(IconData iconData, Color iconColor, String title,
+    {VoidCallback? onTap}) {
+  return SliverToBoxAdapter(
+    child: GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: onTap,
+      child: Row(
+        children: <Widget>[
+          Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Icon(
+                iconData,
+                color: iconColor,
+              )),
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(fontSize: 15.0),
+            ),
+          ),
+        ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    ),
+  );
+}
+
+class _MyItem extends StatelessWidget {
+  const _MyItem(
+      {Key? key,
+      required this.iconData,
+      required this.iconColor,
+      required this.title,
+      this.suffix})
+      : super(key: key);
+
+  final IconData iconData;
+  final Color iconColor;
+  final String title;
+  final Widget? suffix;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 45,
+      child: Row(
+        children: <Widget>[
+          const SizedBox(
+            width: 30,
+          ),
+          Icon(
+            iconData,
+            color: iconColor,
+          ),
+          const SizedBox(
+            width: 30,
+          ),
+          Expanded(
+            child: Text(title),
+          ),
+          const SizedBox(
+            width: 15,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -8,12 +8,12 @@ class WorkoutPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return getWidget();
+    return getMaterialAppWidget();
   }
 
 }
 
-MaterialApp getWidget() {
+MaterialApp getMaterialAppWidget() {
   return MaterialApp(
     theme: ThemeData(
       primarySwatch: Colors.indigo,

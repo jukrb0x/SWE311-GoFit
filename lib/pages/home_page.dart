@@ -6,12 +6,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getWidget();
+    return getMaterialAppWidget("Go Fit");
   }
 }
 
-MaterialApp getWidget() {
+MaterialApp getMaterialAppWidget(String title) {
   return MaterialApp(
+    title: title,
     theme: ThemeData(
       primarySwatch: Colors.indigo,
     ),

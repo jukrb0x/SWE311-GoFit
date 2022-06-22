@@ -1,5 +1,6 @@
 import 'package:GoFit/pages/course_page.dart';
 import 'package:GoFit/pages/home_page.dart';
+import 'package:GoFit/pages/my_center_page.dart';
 import 'package:GoFit/pages/my_page.dart';
 import 'package:GoFit/pages/workout_page.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _ContainerWidgetState extends State<ContainerWidget> {
       const HomePage(),
       const CoursePage(),
       const WorkoutPage(),
-      const MyPage(),
+      MyCenterPage(),
       // add page views here
     ];
 
@@ -62,7 +63,7 @@ class _ContainerWidgetState extends State<ContainerWidget> {
         ));
   }
 
-  @override
+  @override  // debug code
   void didUpdateWidget(ContainerWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     print('update container widget');
@@ -72,14 +73,8 @@ class _ContainerWidgetState extends State<ContainerWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        // reminder: update index when new nav item is added
         children: [0,1,2,3].map((e) => _getPageViewWidget(e)).toList(),
-        // children: [
-        //   _getPageViewWidget(0),
-        //   _getPageViewWidget(1),
-        //   _getPageViewWidget(2),
-        //   _getPageViewWidget(3),
-        //   // add pages here
-        // ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

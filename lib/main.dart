@@ -1,15 +1,23 @@
 import 'dart:io';
 
+import 'package:GoFit/model/user_model.dart';
 import 'package:GoFit/pages/splash.dart';
 import 'package:GoFit/layout/container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   // app entry
 
   runApp(
-      const MyApp()
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => UserModel())
+        ],
+        child: MyApp(),
+      ),
+      // const MyApp()
           // add routers here
   );
   if (Platform.isAndroid) {

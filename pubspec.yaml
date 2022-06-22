@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   sqflite: ^2.0.0 # the db will be handled by Native Java Code, this is useless
+  provider: ^6.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
