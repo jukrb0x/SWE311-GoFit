@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class MyPage extends StatelessWidget {
+  const MyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +16,23 @@ MaterialApp getWidget() {
       primarySwatch: Colors.indigo,
     ),
     home: const Scaffold(
-      // todo: splash -> container
-      body: HomePageView(title: "GO FIT"),
+      body: MyPageView(title: "My Fitness"),
     ),
     debugShowCheckedModeBanner: false,
   );
 }
 
 
-class HomePageView extends StatefulWidget {
-  const HomePageView({Key? key, required this.title}) : super(key: key);
+class MyPageView extends StatefulWidget {
+  const MyPageView({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<HomePageView> createState() => _HomePageViewState();
+  State<MyPageView> createState() => _MyPageViewState();
 }
 
-class _HomePageViewState extends State<HomePageView> {
+class _MyPageViewState extends State<MyPageView> {
   // database API channel
   static const platform = MethodChannel('com.jb.gofit/test');
   List _userList = ["default"];

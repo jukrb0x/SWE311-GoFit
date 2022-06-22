@@ -1,4 +1,7 @@
+import 'package:GoFit/pages/course_page.dart';
 import 'package:GoFit/pages/home_page.dart';
+import 'package:GoFit/pages/my_page.dart';
+import 'package:GoFit/pages/workout_page.dart';
 import 'package:flutter/material.dart';
 
 class ContainerWidget extends StatefulWidget {
@@ -8,12 +11,12 @@ class ContainerWidget extends StatefulWidget {
   State<ContainerWidget> createState() => _ContainerWidgetState();
 }
 
-class navItem {
+class NavItem {
   String label;
   IconData iconData; // Material IconData
   MaterialColor? backgroundColor;
 
-  navItem(this.label, this.iconData);
+  NavItem(this.label, this.iconData);
 
   void setColor(MaterialColor color) {
     backgroundColor = color;
@@ -24,11 +27,11 @@ class _ContainerWidgetState extends State<ContainerWidget> {
   // todo: container -> home page knows the user login state
 
   late List<Widget> pages; // container page views
-  List<navItem> navItems = [
-    navItem('Home', Icons.home),
-    navItem('Course', Icons.houseboat),
-    navItem('Workout', Icons.fitness_center),
-    navItem('My Fit', Icons.account_circle)
+  List<NavItem> navItems = [
+    NavItem('Home', Icons.home),
+    NavItem('Course', Icons.houseboat),
+    NavItem('Workout', Icons.fitness_center),
+    NavItem('My Fit', Icons.account_circle)
   ];
   int _selectedIndex = 0;
   late List<BottomNavigationBarItem> navBarItems;
@@ -38,6 +41,9 @@ class _ContainerWidgetState extends State<ContainerWidget> {
     super.initState();
     pages = [
       const HomePage(),
+      const CoursePage(),
+      const WorkoutPage(),
+      const MyPage(),
       // add page views here
     ];
 
@@ -57,13 +63,23 @@ class _ContainerWidgetState extends State<ContainerWidget> {
   }
 
   @override
+  void didUpdateWidget(ContainerWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('update container widget');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: [
-          _getPageViewWidget(0),
-          // add pages here
-        ],
+        children: [0,1,2,3].map((e) => _getPageViewWidget(e)).toList(),
+        // children: [
+        //   _getPageViewWidget(0),
+        //   _getPageViewWidget(1),
+        //   _getPageViewWidget(2),
+        //   _getPageViewWidget(3),
+        //   // add pages here
+        // ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -73,6 +89,7 @@ class _ContainerWidgetState extends State<ContainerWidget> {
         onTap: (int index) {
           if (_selectedIndex != index) {
             setState(() {
+              print(_selectedIndex);
               _selectedIndex = index;
             });
           }
