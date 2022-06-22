@@ -1,12 +1,10 @@
 package com.jb.gofit;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.room.Room;
 
 import com.jb.gofit.dao.UserDao;
 import com.jb.gofit.database.AppDatabase;
@@ -31,11 +29,18 @@ public class MainActivity extends FlutterActivity {
         db = AppDatabase.getInstance(this.getApplication());
     }
 
-    private void addUser(){
+    private void addTestUser(){
         UserDao userDao = db.userDao();
-        User testUser = new User();
-        testUser.setFirstName("John");
-        testUser.setLastName("Sena");
+        User testUser = new User(
+                "John Sena",
+                "123@gmail.com",
+                "123456",
+                65.0,
+                170.0,
+                20,
+                1
+        );
+        testUser.setWeightGoal(50);
         userDao.insertAll(testUser);
     }
 
@@ -51,7 +56,7 @@ public class MainActivity extends FlutterActivity {
 
                                 List<String> userList = new ArrayList<>();
                                 for (User user: userDao.getAll()) {
-                                    userList.add(user.getFirstName());
+                                    userList.add(user.getName());
                                 }
 //                                userList = userDao.getAll().forEach(i -> userList.add(i));
                                 Log.i("APP", String.valueOf(userList));
@@ -61,7 +66,11 @@ public class MainActivity extends FlutterActivity {
 
                             if(call.method.equals("addUserTest")){
                                 Log.i("APP", "add user test.");
-                                addUser();
+                                addTestUser();
+                            }
+
+                            if(call.method.equals("clearDatabase")){
+                                db.clearAllTables();
                             }
 
                         }

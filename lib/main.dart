@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Go Fit',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
       home: const MyHomePage(title: 'Go Fit'),
       debugShowCheckedModeBanner: false,
@@ -33,9 +33,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // database API channel
   static const platform = MethodChannel('com.jb.gofit/test');
   List _userList = ["default"];
-  int _counter = 0;
+
+  // Navigation bar
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 3: Settings',
+      style: optionStyle,
+    ),
+  ];
 
   Future<void> _getUserList() async {
     final List<dynamic> result = await platform.invokeMethod('getUserList');
@@ -44,18 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-  
   Future<void> _addTestUser() async {
     await platform.invokeListMethod('addUserTest');
   }
-  
+
   Future<void> _clearDatabase() async {
     await platform.invokeListMethod('clearDatabase');
+    print("clear database");
   }
 
   @override
@@ -76,18 +93,52 @@ class _MyHomePageState extends State<MyHomePage> {
             //   style: Theme.of(context).textTheme.headline4,
             // ),
             Text('$_userList'),
-            Text('$_counter'),
+            Text('$_selectedIndex'),
             ElevatedButton(onPressed: _addTestUser, child: const Text("Add test user")),
-            ElevatedButton(onPressed: _clearDatabase, child:const Text("Clear DB") )
+            ElevatedButton(onPressed: _getUserList, child:const Text("Show DB") ),
+
+
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.indigo,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.houseboat),
+            label: 'Course',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fitness_center),
+            label: 'Workout',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'My Fit',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.indigo[500],
+        onTap: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },),
+
+      // test code
       floatingActionButton: FloatingActionButton(
-        onPressed: () {_getUserList();_incrementCounter();},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        onPressed: () {
+          _clearDatabase();
+        },
+        tooltip: 'Clear Database',
+        child: const Icon(Icons.cleaning_services),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
-
