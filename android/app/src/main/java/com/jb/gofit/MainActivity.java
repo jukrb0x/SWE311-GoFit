@@ -30,6 +30,21 @@ public class MainActivity extends FlutterActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = AppDatabase.getInstance(this.getApplication());
+        {
+            UserDao userDao = db.userDao();
+            User testUser = new User(
+                    "test",
+                    "John Sena",
+                    "123@gmail.com",
+                    "123",
+                    65.0,
+                    170.0,
+                    20,
+                    1
+            );
+            testUser.setWeightGoal(50);
+            userDao.insertAll(testUser);
+        }
     }
 
     // start

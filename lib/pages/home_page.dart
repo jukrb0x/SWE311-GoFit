@@ -18,7 +18,7 @@ MaterialApp getMaterialAppWidget(String title) {
     ),
     home: const Scaffold(
       // todo: splash -> container
-      body: HomePageView(title: "GO FIT"),
+      body: HomePageView(title: "Welcome"),
     ),
     debugShowCheckedModeBanner: false,
   );
@@ -35,26 +35,6 @@ class HomePageView extends StatefulWidget {
 }
 
 class _HomePageViewState extends State<HomePageView> {
-  // database API channel
-  static const platform = MethodChannel('com.jb.gofit/test');
-  List _userList = ["default"];
-
-
-  Future<void> _getUserList() async {
-    final List<dynamic> result = await platform.invokeMethod('getUserList');
-    setState(() {
-      _userList = result;
-    });
-  }
-
-  Future<void> _addTestUser() async {
-    await platform.invokeListMethod('addUserTest');
-  }
-
-  Future<void> _clearDatabase() async {
-    await platform.invokeListMethod('clearDatabase');
-    print("clear database");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,27 +49,11 @@ class _HomePageViewState extends State<HomePageView> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headline4,
-            // ),
-            Text('$_userList'),
-            ElevatedButton(onPressed: _addTestUser, child: const Text("Add test user")),
-            ElevatedButton(onPressed: _getUserList, child:const Text("Show DB") ),
-
 
           ],
         ),
       ),
       // test code
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _clearDatabase();
-        },
-        tooltip: 'Clear Database',
-        child: const Icon(Icons.cleaning_services),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

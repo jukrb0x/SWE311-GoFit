@@ -15,6 +15,7 @@ class WorkoutPage extends StatelessWidget{
 
 MaterialApp getMaterialAppWidget() {
   return MaterialApp(
+    title: "Go Fit",
     theme: ThemeData(
       primarySwatch: Colors.indigo,
     ),

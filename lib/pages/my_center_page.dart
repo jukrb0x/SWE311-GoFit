@@ -9,27 +9,21 @@ class MyCenterPage extends StatefulWidget {
 }
 
 class _MyCenterPageState extends State<MyCenterPage> {
+  // todo get the global state by model
   bool _isLogin = false;
 
   Widget _getView(BuildContext context, bool isLogin) {
     if (isLogin) {
       return _getLoginColumn(context);
-      // return Offstage(
-      //   offstage: !isLogin,
-      //   child: _getLoginColumn(context),
-      // );
     } else {
-      return _getUnLoginColumn(context);
-      // return Offstage(
-      //   offstage: isLogin,
-      //   child: _getUnLoginColumn(context),
-      // );
+      return _getLoggedInColumn(context);
     }
   }
 
-  Column _getUnLoginColumn(BuildContext context) {
+  Column _getLoggedInColumn(BuildContext context) {
+    // todo
     return Column(
-      children: [TextField()],
+      children: [TextField(), Text("logged in")],
     );
   }
 
@@ -103,7 +97,7 @@ class _MyCenterPageState extends State<MyCenterPage> {
   }
 
   _changeStat() {
-    setState((){
+    setState(() {
       _isLogin = !_isLogin;
     });
   }
