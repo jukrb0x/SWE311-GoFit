@@ -42,9 +42,10 @@ class _AccountPageState extends State<AccountPage> {
               ),
               const Divider(),
               ElevatedButton(
-                  onPressed: () =>
-                      Provider.of<UserModel>(context, listen: false).login(
-                          usernameController.text, passwordController.text),
+                  onPressed: () => {
+                        Provider.of<UserModel>(context, listen: false).login(
+                            usernameController.text, passwordController.text),
+                      },
                   child: const Text("Login")),
             ],
           ),
@@ -52,4 +53,6 @@ class _AccountPageState extends State<AccountPage> {
       ),
     );
   }
+
+  void showSnackBarLoginFailed(BuildContext context) {}
 }

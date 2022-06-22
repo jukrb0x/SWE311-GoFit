@@ -23,4 +23,7 @@ public interface UserDao {
 
     @Delete
     void delete(User user);
+
+    @Query("SELECT * FROM user WHERE username LIKE :username AND password LIKE :password")
+    List<User> checkUser(String username, String password);
 }

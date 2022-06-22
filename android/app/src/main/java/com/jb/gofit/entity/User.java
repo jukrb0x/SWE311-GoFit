@@ -10,6 +10,9 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     public int uid;
 
+    @ColumnInfo(name = "username")
+    public String username;
+
     @ColumnInfo(name = "name")
     public String name;
 
@@ -35,7 +38,8 @@ public class User {
     public double weightGoal;
 
     // Constructor
-    public User(String name, String email, String password, double weight, double height, int age, int sex) {
+    public User(String username, String name, String email, String password, double weight, double height, int age, int sex) {
+        this.username = username;
         this.name = name;
         this.email = email;
         this.password = password;

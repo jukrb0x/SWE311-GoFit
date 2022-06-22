@@ -1,7 +1,13 @@
+import 'package:GoFit/api/platform_channel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class UserModel extends ChangeNotifier {
+  // native channel
+  static const platform = Platforms.platformUser;
+
+  late bool isLogin;
   late String username;
   late String password;
 
@@ -15,9 +21,19 @@ class UserModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void login(String username, String password) {
+  Future<bool> login(String username, String password) async {
     username = username;
     password = password;
-    print('$username $password');
+    bool result = await platform.invokeMethod('login',
+        {'username':username,'password':password}
+    );
+    print('$username $password $result');
+    return result;
+  }
+
+  void register(String username, String password) {
+    username = username;
+    password = password;
+
   }
 }
