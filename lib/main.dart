@@ -1,9 +1,23 @@
+import 'dart:io';
+
+import 'package:GoFit/pages/splash.dart';
+import 'package:GoFit/layout/container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
   // app entry
-  runApp(const MyApp());
+
+  runApp(
+      const MyApp()
+          // add routers here
+  );
+  if (Platform.isAndroid) {
+    // transparent status bar
+    SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +31,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: const MyHomePage(title: 'Go Fit'),
+      // home: const MyHomePage(title: 'Go Fit'),
+      home: const Scaffold(
+        // todo: splash -> container
+        body: ContainerWidget(),
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
