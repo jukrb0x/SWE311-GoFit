@@ -13,7 +13,7 @@ class _MyCenterPageState extends State<MyCenterPage> {
   bool _isLogin = false;
 
   Widget _getView(BuildContext context, bool isLogin) {
-    if (isLogin) {
+    if (!isLogin) {
       return _getLoginColumn(context);
     } else {
       return _getLoggedInColumn(context);
