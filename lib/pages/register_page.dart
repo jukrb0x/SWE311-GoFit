@@ -3,6 +3,7 @@ import 'package:GoFit/pages/login_page.dart';
 import 'package:GoFit/pages/my_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:GoFit/layout/container.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -76,10 +77,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     _register().then((value) => {
                           if (value == true)
                             {
-                              Navigator.pushReplacement(context,
+                              Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(builder: (context) {
-                                return LoginPage();
-                              }))
+                                    return ContainerWidget();
+                                  }), (route) => false)
+                              // Navigator.pushReplacement(context,
+                              //     MaterialPageRoute(builder: (context) {
+                              //   return LoginPage();
+                              // }))
                             }
                           else
                             {
@@ -115,6 +120,8 @@ class _RegisterPageState extends State<RegisterPage> {
         nameController.text,
         emailController.text,
         passwordController.text);
+    await Provider.of<UserModel>(context, listen: false)
+        .login(usernameController.text, passwordController.text);
     return res;
   }
 

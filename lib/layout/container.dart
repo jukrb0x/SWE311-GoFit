@@ -1,9 +1,11 @@
+import 'package:GoFit/model/user_model.dart';
 import 'package:GoFit/pages/course_page.dart';
 import 'package:GoFit/pages/home_page.dart';
 import 'package:GoFit/pages/my_center_page.dart';
 import 'package:GoFit/pages/my_page.dart';
 import 'package:GoFit/pages/workout_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ContainerWidget extends StatefulWidget {
   const ContainerWidget({Key? key}) : super(key: key);
@@ -40,6 +42,8 @@ class _ContainerWidgetState extends State<ContainerWidget> {
   @override
   void initState() {
     super.initState();
+    Provider.of<UserModel>(context, listen: false)
+        .setUsername("Guest");
     pages = [
       const HomePage(),
       const CoursePage(),

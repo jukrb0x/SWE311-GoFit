@@ -25,15 +25,15 @@ class _WorkoutPageState extends State<WorkoutPage> {
 
   List<MyCard> entries = <MyCard>[
     MyCard(
-      'How to Use Gym Equipment',
-      'https://i.ytimg.com/vi/r3h1Nf-wY6Y/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAealRxqGcm83xWEYyUTAxsItO7NQ',
-      'This video is for people looking for a workout program targeted toward muscle growth and fat loss.',
-      videoLink: "https://www.youtube.com/watch?v=r3h1Nf-wY6Y",
+      '30-Minute HIIT Cardio Workout with Warm Up',
+      'https://i.ytimg.com/vi/ml6cT4AZdqI/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC2Yakf4nieopGux521AsbN50n9ig',
+      'In this high intensity cardio bodyweight workout from trainer Lita Lewis, you’ll spike your heart rate with high-knees, fast feet, and star jumps; plus work your core and lower body with jumping lunges and planks - at home! No equipment needed!',
+      videoLink: "https://www.youtube.com/watch?v=ml6cT4AZdqI",
     ),
     MyCard(
-        '10 MIN BODYWEIGHT WORKOUT',
-        'https://i.ytimg.com/vi/UoC_O3HzsH0/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB4dfxKzSAShhXVAt3wx800Rwj38Q',
-        '(NO EQUIPMENT HOME WORKOUT!)',
+        '20 Minute Full Body Cardio HIIT Workout [NO REPEAT]',
+        'https://i.ytimg.com/vi/M0uO8X3_tEA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBJHzrJ8QFcwKzc_piA8hLNBuKyCQ',
+        'Tap in with us for a fun 20 Minute high intensity cardio ',
         videoLink: "https://www.youtube.com/watch?v=UoC_O3HzsH0"),
     MyCard(
       '20 MIN FULL BODY WORKOUT - Beginner Version',

@@ -37,37 +37,66 @@ class HomePageView extends StatefulWidget {
 
 class _HomePageViewState extends State<HomePageView> {
   @override
+  initState() {
+    super.initState();
+    Provider.of<UserModel>(context, listen: false).setUsername("Guest");
+  }
+
+  _welcomeLogin(String username) {
+    return Text(
+      "Welcome, $username",
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            const Card(
-              child: SizedBox(
-                child: Center(
-                    child: Image(
-                  image: AssetImage("images/home_head.jpg"),
-                )),
+      body: Column(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              const Card(
+                child: SizedBox(
+                  child: Center(
+                      child: Image(
+                    image: AssetImage("images/home_head.jpg"),
+                  )),
+                ),
               ),
-            ),
-            const Card(
-              child: SizedBox(
-                child: Center(
-                  child: Text("ss")
-                )
+              Column(children: [
+                SizedBox(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                      Text("GoFit Today",
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.indigo)),
+                      Text("Keep Fit Everyday",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                    ])),
+              ]),
+              Divider(),
+              Consumer<UserModel>(
+                builder: (context, user, child) => Column(
+                  children: [_welcomeLogin(user.username)],
+                ),
               )
-            ),
-            // todo this is example
-            Consumer<UserModel>(
-              builder: (context, user, child) => Text('${user.isLogin}'),
-            )
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
+
       // test code
     );
 

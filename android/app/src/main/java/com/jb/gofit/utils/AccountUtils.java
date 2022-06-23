@@ -46,4 +46,9 @@ public class AccountUtils {
             return true;
         }
     }
+
+    public User getUser(String username) {
+        UserDao userDao = db.userDao();
+        return userDao.getUser(username);
+    }
 }

@@ -1,3 +1,4 @@
+import 'package:GoFit/layout/container.dart';
 import 'package:GoFit/model/user_model.dart';
 import 'package:GoFit/pages/login_page.dart';
 import 'package:GoFit/pages/home_page.dart';
@@ -51,17 +52,38 @@ class _MyCenterPageState extends State<MyCenterPage> {
   Column _getLoggedInColumn(BuildContext context) {
     // todo
     return Column(
-      children: const [
+      children: [
         Padding(
           padding: EdgeInsets.all(10),
           child: Center(
             child: Center(
-              child: Text("ss"),
+              child: Column(
+                children: [
+                  Text("Welcome",
+                      style: TextStyle(fontSize: 20)),
+                  ElevatedButton(
+                    child: const Text("Logout"),
+                    onPressed: () {
+                      _logout();
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         )
         // TextField(), Text("logged in")
       ],
+    );
+  }
+
+  _logout(){
+    Provider.of<UserModel>(context, listen: false).logout();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return ContainerWidget();
+      }),
     );
   }
 

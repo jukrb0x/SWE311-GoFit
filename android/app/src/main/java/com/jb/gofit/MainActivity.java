@@ -121,6 +121,10 @@ public class MainActivity extends FlutterActivity {
                                         call.argument("password"));
                                 result.success(res);
                             }
+                            if(call.method.equals("getUserInfo")) {
+                                User user = Account.getUser(call.argument("username"));
+                                result.success(user);
+                            }
                         })
                 );
     }

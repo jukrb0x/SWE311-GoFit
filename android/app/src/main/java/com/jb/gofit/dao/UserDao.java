@@ -30,4 +30,8 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE username LIKE :username")
     List<User> checkUser(String username);
 
+    // get user by username
+    @Query("SELECT * FROM user WHERE username LIKE :username")
+    User getUser(String username);
+
 }

@@ -57,22 +57,26 @@ class _LoginPageState extends State<LoginPage> {
                             {
                               // login success
                               // push replace the login page
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) {
-                                  // notify my fit reset
-                                  return ContainerWidget();
-                                }),
-                              )
+                              // Navigator.pop(context)
+
+                              Navigator.pushAndRemoveUntil(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ContainerWidget();
+                              }), (route) => false)
+
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) {
+                              //     // notify my fit reset
+                              //     return ContainerWidget();
+                              //   }),
+                              // )
                             }
                           else
                             {
                               // login failed, pop up warning
-                              showFailedDialog(
-                                  "Login Failed",
-                                  "Please check your credentials."
-                              )
-
+                              showFailedDialog("Login Failed",
+                                  "Please check your credentials.")
                             }
                         });
                   },
@@ -80,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
               const Padding(padding: EdgeInsets.only(top: 20)),
               const Text("No account?"),
               ElevatedButton(
-                onPressed: (){
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) {
@@ -99,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<bool> _login() async {
-    if(usernameController.text =="" || passwordController.text ==""){
+    if (usernameController.text == "" || passwordController.text == "") {
       print("empty");
       return false;
     }
@@ -109,12 +113,10 @@ class _LoginPageState extends State<LoginPage> {
     return res;
   }
 
-
   void showFailedDialog(String title, String content) {
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) =>
-            AlertDialog(
+        builder: (BuildContext context) => AlertDialog(
               title: Text(title),
               content: Text(content),
               actions: <Widget>[
@@ -129,5 +131,4 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ));
   }
-
 }
