@@ -6,7 +6,7 @@ class CoursePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getMaterialAppWidget("Go Fit");
+    return getMaterialAppWidget("GoFit");
   }
 }
 
@@ -18,7 +18,7 @@ MaterialApp getMaterialAppWidget(String title) {
     ),
     home: const Scaffold(
       // todo: splash -> container
-      body: CoursePageView(title: "Go Fit"),
+      body: CoursePageView(title: "GoFit"),
     ),
     debugShowCheckedModeBanner: false,
   );

@@ -35,11 +35,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Go Fit',
+      title: 'GoFit',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      // home: const MyHomePage(title: 'Go Fit'),
+      // home: const MyHomePage(title: 'GoFit'),
       home: const Scaffold(
         // todo: splash -> container
         body: ContainerWidget(),

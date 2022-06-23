@@ -3,14 +3,14 @@ import 'package:GoFit/pages/my_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AccountPage extends StatefulWidget {
-  const AccountPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<AccountPage> createState() => _AccountPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _AccountPageState extends State<AccountPage> {
+class _LoginPageState extends State<LoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -29,14 +29,14 @@ class _AccountPageState extends State<AccountPage> {
               TextField(
                 controller: usernameController,
                 autofocus: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     labelText: "Username",
                     hintText: "Your username",
                     prefixIcon: Icon(Icons.person)),
               ),
               TextField(
                 controller: passwordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     labelText: "Password",
                     hintText: "Your password",
                     prefixIcon: Icon(Icons.lock)),
@@ -71,7 +71,7 @@ class _AccountPageState extends State<AccountPage> {
               Text("No account?"),
               ElevatedButton(
                 onPressed: (){},
-                child: Text("s"),
+                child: Text("Register"),
                 style: ElevatedButton.styleFrom(primary: Colors.green),
               )
             ],

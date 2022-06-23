@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getMaterialAppWidget("Go Fit");
+    return getMaterialAppWidget("GoFit");
   }
 }
 
@@ -20,12 +20,11 @@ MaterialApp getMaterialAppWidget(String title) {
     ),
     home: const Scaffold(
       // todo: splash -> container
-      body: HomePageView(title: "Welcome"),
+      body: HomePageView(title: "Welcome to GoFit"),
     ),
     debugShowCheckedModeBanner: false,
   );
 }
-
 
 class HomePageView extends StatefulWidget {
   const HomePageView({Key? key, required this.title}) : super(key: key);
@@ -37,7 +36,6 @@ class HomePageView extends StatefulWidget {
 }
 
 class _HomePageViewState extends State<HomePageView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,23 +44,26 @@ class _HomePageViewState extends State<HomePageView> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            const Card(
+              child: SizedBox(
+                child: Center(
+                    child: Image(
+                  image: AssetImage("images/home_head.jpg"),
+                )),
+              ),
             ),
+            // todo this is example
             Consumer<UserModel>(
               builder: (context, user, child) => Text('${user.isLogin}'),
             )
-
           ],
         ),
       ),
       // test code
     );
 
-    Widget _getHomeWidgets(BuildContext context){
-
-    }
+    Widget _getHomeWidgets(BuildContext context) {}
   }
 }

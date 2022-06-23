@@ -10,6 +10,11 @@ class UserModel extends ChangeNotifier {
   late bool isLogin = false;
   late String username;
   late String password;
+  late String email;
+  late String weight;
+  late String height;
+  late String age;
+  late String sex;
 
   void setUsername(String username) {
     username = username;

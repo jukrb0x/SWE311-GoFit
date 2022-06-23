@@ -1,4 +1,4 @@
-import 'package:GoFit/pages/account_page.dart';
+import 'package:GoFit/pages/login_page.dart';
 import 'package:GoFit/pages/home_page.dart';
 import 'package:GoFit/pages/my_page.dart';
 import 'package:flutter/material.dart';
@@ -58,13 +58,23 @@ class _MyCenterPageState extends State<MyCenterPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
-                            return AccountPage();
+                            return LoginPage();
                           }),
                         );
                       },
                       child: Text("Login")),
-                  const ElevatedButton(
-                      onPressed: null, child: Text("Register")),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return LoginPage();
+                        }),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
+                    child: const Text("Register"),
+                  ),
                 ],
               )
             ],
