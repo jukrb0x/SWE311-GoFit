@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.jb.gofit.dao.UserDao;
 import com.jb.gofit.database.AppDatabase;
 import com.jb.gofit.entity.User;
+import com.jb.gofit.utils.AccountUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class MainActivity extends FlutterActivity {
     private static final String CHANNEL_TEST = "com.jb.gofit/test";
     private static final String CHANNEL_USER = "com.jb.gofit/user";
     AppDatabase db;
+    AccountUtils Account;
     List<User> userList;
 
     @Override
@@ -45,17 +47,11 @@ public class MainActivity extends FlutterActivity {
             testUser.setWeightGoal(50);
             userDao.insertAll(testUser);
         }
+        // init the account utils
+        this.Account = new AccountUtils(db);
     }
 
     // start
-    private Boolean login(String username, String password) {
-        UserDao userDao = db.userDao();
-        List<User> userList = userDao.checkUser(username, password);
-        for (User user : userList) {
-            return Objects.equals(user.password, password);
-        }
-        return false;
-    }
 
     // end
 
@@ -114,7 +110,7 @@ public class MainActivity extends FlutterActivity {
                         ((call, result) -> {
                             // login request
                             if (call.method.equals("login")) {
-                                Boolean res = login(call.argument("username"), call.argument("password"));
+                                Boolean res = Account.login(call.argument("username"), call.argument("password"));
                                 result.success(res);
                             }
                         })

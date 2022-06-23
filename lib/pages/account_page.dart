@@ -1,4 +1,5 @@
 import 'package:GoFit/model/user_model.dart';
+import 'package:GoFit/pages/my_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ class _AccountPageState extends State<AccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    Future<bool> res;
     return Scaffold(
       appBar: AppBar(
         title: Text("Login"),
@@ -40,13 +42,38 @@ class _AccountPageState extends State<AccountPage> {
                     prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
               ),
-              const Divider(),
+              // const Divider(),
+              const Padding(
+                padding: EdgeInsets.only(top: 15),
+              ),
               ElevatedButton(
-                  onPressed: () => {
-                        Provider.of<UserModel>(context, listen: false).login(
-                            usernameController.text, passwordController.text),
-                      },
-                  child: const Text("Login")),
+                  onPressed: () {
+                    _login().then((value) => {
+                          if (value == true)
+                            {
+                              // login success
+                              // push replace the login page
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return MyPage();
+                                }),
+                              )
+                            }
+                          else
+                            {
+                              // login failed, pop up warning
+                            }
+                        });
+                  },
+                  child: Text("Login")),
+              Padding(padding: EdgeInsets.only(top: 20)),
+              Text("No account?"),
+              ElevatedButton(
+                onPressed: (){},
+                child: Text("s"),
+                style: ElevatedButton.styleFrom(primary: Colors.green),
+              )
             ],
           ),
         ),
@@ -54,5 +81,20 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
+  Future<bool> _login() async {
+    bool res;
+    res = await Provider.of<UserModel>(context, listen: false)
+        .login(usernameController.text, passwordController.text);
+    return res;
+  }
+
+  Future<bool> _register() async {
+    bool res;
+    res = await Provider.of<UserModel>(context, listen: false)
+        .register(usernameController.text, passwordController.text);
+    return res;
+  }
+
   void showSnackBarLoginFailed(BuildContext context) {}
+
 }

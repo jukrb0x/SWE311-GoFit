@@ -1,5 +1,7 @@
+import 'package:GoFit/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -49,11 +51,18 @@ class _HomePageViewState extends State<HomePageView> {
             const Text(
               'You have pushed the button this many times:',
             ),
+            Consumer<UserModel>(
+              builder: (context, user, child) => Text('${user.isLogin}'),
+            )
 
           ],
         ),
       ),
       // test code
     );
+
+    Widget _getHomeWidgets(BuildContext context){
+
+    }
   }
 }

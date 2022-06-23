@@ -7,7 +7,7 @@ class UserModel extends ChangeNotifier {
   // native channel
   static const platform = Platforms.platformUser;
 
-  late bool isLogin;
+  late bool isLogin = false;
   late String username;
   late String password;
 
@@ -27,13 +27,21 @@ class UserModel extends ChangeNotifier {
     bool result = await platform.invokeMethod('login',
         {'username':username,'password':password}
     );
-    print('$username $password $result');
+    print('login: $username $password $result');
+    isLogin = result;
+    notifyListeners();
     return result;
   }
 
-  void register(String username, String password) {
+  Future<bool> register(String username, String password) async {
     username = username;
     password = password;
+    bool result = await platform.invokeMethod('register',
+        {'username':username,'password':password}
+    );
+    print('register: $username $password $result');
+    notifyListeners();
+    return result;
 
   }
 }
