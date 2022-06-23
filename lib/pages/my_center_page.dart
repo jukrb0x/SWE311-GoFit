@@ -1,8 +1,10 @@
+import 'package:GoFit/model/user_model.dart';
 import 'package:GoFit/pages/login_page.dart';
 import 'package:GoFit/pages/home_page.dart';
 import 'package:GoFit/pages/my_page.dart';
 import 'package:GoFit/pages/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyCenterPage extends StatefulWidget {
   @override
@@ -13,7 +15,31 @@ class _MyCenterPageState extends State<MyCenterPage> {
   // todo get the global state by model
   bool _isLogin = false;
 
+  int _selectedIndex = 0;
+  late List<Widget> pages; // container page views
+
+  @override
+  void initState() {
+    super.initState();
+    pages = [_getLoginColumn(context), _getLoggedInColumn(context)];
+    _isLogin = Provider.of<UserModel>(context, listen: false).getStatus();
+  }
+
   Widget _getView(BuildContext context, bool isLogin) {
+    int index;
+    if (isLogin) {
+      index = 0;
+    } else {
+      index = 1;
+    }
+    // return Offstage(
+    //     // prevent disordering
+    //     offstage: _selectedIndex != index,
+    //     child: TickerMode(
+    //       enabled: _selectedIndex == index,
+    //       child: pages[index],
+    //     ));
+
     if (!isLogin) {
       return _getLoginColumn(context);
     } else {
@@ -24,7 +50,17 @@ class _MyCenterPageState extends State<MyCenterPage> {
   Column _getLoggedInColumn(BuildContext context) {
     // todo
     return Column(
-      children: [TextField(), Text("logged in")],
+      children: const [
+        Padding(
+          padding: EdgeInsets.all(10),
+          child: Center(
+            child: Center(
+              child: Text("ss"),
+            ),
+          ),
+        )
+        // TextField(), Text("logged in")
+      ],
     );
   }
 
@@ -101,7 +137,7 @@ class _MyCenterPageState extends State<MyCenterPage> {
         onPressed: () {
           _changeStat();
         },
-        tooltip: 'Clear Database',
+        tooltip: 'Test Change',
         child: const Icon(Icons.cleaning_services),
       ),
     );
@@ -110,6 +146,15 @@ class _MyCenterPageState extends State<MyCenterPage> {
   _changeStat() {
     setState(() {
       _isLogin = !_isLogin;
+
+      if(_isLogin == true){
+        _selectedIndex = 1;
+      } else {
+        _selectedIndex = 0;
+      }
+
+      print("isLogin? " + _isLogin.toString());
+      print("page index " + _selectedIndex.toString());
     });
   }
 }

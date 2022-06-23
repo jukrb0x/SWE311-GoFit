@@ -53,4 +53,8 @@ class UserModel extends ChangeNotifier {
     notifyListeners();
     return result;
   }
+
+  bool getStatus(){
+    return isLogin;
+  }
 }

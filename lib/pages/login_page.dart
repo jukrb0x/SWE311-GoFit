@@ -1,6 +1,7 @@
 import 'package:GoFit/layout/container.dart';
 import 'package:GoFit/model/user_model.dart';
 import 'package:GoFit/pages/home_page.dart';
+import 'package:GoFit/pages/my_center_page.dart';
 import 'package:GoFit/pages/my_page.dart';
 import 'package:GoFit/pages/register_page.dart';
 import 'package:flutter/material.dart';
