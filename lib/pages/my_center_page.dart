@@ -4,6 +4,7 @@ import 'package:GoFit/pages/home_page.dart';
 import 'package:GoFit/pages/my_page.dart';
 import 'package:GoFit/pages/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class MyCenterPage extends StatefulWidget {
@@ -137,14 +138,23 @@ class _MyCenterPageState extends State<MyCenterPage> {
             padding: const EdgeInsets.all(24.0),
             child: _getView(context, _isLogin)),
       ),
+      // todo
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _changeStat();
+          _clearDatabase();
+          // _changeStat();
         },
         tooltip: 'Test Change',
         child: const Icon(Icons.cleaning_services),
       ),
     );
+  }
+
+  static const platform = MethodChannel('com.jb.gofit/test');
+
+  Future<void> _clearDatabase() async {
+    await platform.invokeListMethod('clearDatabase');
+    print("clear database");
   }
 
   _changeStat() {

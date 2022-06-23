@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pod_player/pod_player.dart';
 
 class VideoPlayerPage extends StatefulWidget {
-  VideoPlayerPage(this.title, this.link, {required this.description, Key? key}) : super(key: key);
+  VideoPlayerPage(this.title, this.link, {required this.description, Key? key})
+      : super(key: key);
   String title, link, description;
 
   @override
-  State<VideoPlayerPage> createState() => _VideoPlayerPageState(title, link, description);
+  State<VideoPlayerPage> createState() =>
+      _VideoPlayerPageState(title, link, description);
 }
 
 class _VideoPlayerPageState extends State<VideoPlayerPage> {
@@ -52,14 +54,24 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
             ),
             const Divider(),
             Padding(
-          padding: EdgeInsets.all(10),
-          child: Text(
-              description,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Text(
+                    description,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text("LIKE"),
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
+                  )
+                ],
               ),
-            ),),
+            ),
           ],
         ),
       ),
