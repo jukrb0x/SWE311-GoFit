@@ -84,7 +84,11 @@ class _MyCenterPageState extends State<MyCenterPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: ,
             children: [
-              const Text("Login before build your body"),
+              const Text("Login before build your body",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  )),
               const Padding(padding: EdgeInsets.only(top: 10, bottom: 10)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

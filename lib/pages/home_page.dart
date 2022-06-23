@@ -54,6 +54,13 @@ class _HomePageViewState extends State<HomePageView> {
                 )),
               ),
             ),
+            const Card(
+              child: SizedBox(
+                child: Center(
+                  child: Text("ss")
+                )
+              )
+            ),
             // todo this is example
             Consumer<UserModel>(
               builder: (context, user, child) => Text('${user.isLogin}'),

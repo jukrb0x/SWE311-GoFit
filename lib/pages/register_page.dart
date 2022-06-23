@@ -33,64 +33,65 @@ class _RegisterPageState extends State<RegisterPage> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
-              TextField(
-                controller: usernameController,
-                autofocus: true,
-                decoration: const InputDecoration(
-                    labelText: "Username",
-                    hintText: "Your username",
-                    prefixIcon: Icon(Icons.person)),
-              ),
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                    labelText: "Name",
-                    hintText: "e.g. John Sena",
-                    prefixIcon: Icon(Icons.drive_file_rename_outline)),
-                obscureText: false,
-              ),
-              TextField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                    labelText: "Email",
-                    hintText: "your@email.com",
-                    prefixIcon: Icon(Icons.email)),
-                obscureText: false,
-              ),
-              TextField(
-                controller: passwordController,
-                decoration: const InputDecoration(
-                    labelText: "Password",
-                    hintText: "Your password",
-                    prefixIcon: Icon(Icons.lock)),
-                obscureText: true,
-              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                  child: Column(children: <Widget>[
+                TextField(
+                  controller: usernameController,
+                  autofocus: true,
+                  decoration: const InputDecoration(
+                      labelText: "Username",
+                      hintText: "Your username",
+                      prefixIcon: Icon(Icons.person)),
+                ),
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                      labelText: "Name",
+                      hintText: "e.g. John Sena",
+                      prefixIcon: Icon(Icons.drive_file_rename_outline)),
+                  obscureText: false,
+                ),
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                      labelText: "Email",
+                      hintText: "your@email.com",
+                      prefixIcon: Icon(Icons.email)),
+                  obscureText: false,
+                ),
+                TextField(
+                  controller: passwordController,
+                  decoration: const InputDecoration(
+                      labelText: "Password",
+                      hintText: "Your password",
+                      prefixIcon: Icon(Icons.lock)),
+                  obscureText: true,
+                ),
 
-              const Padding(padding: EdgeInsets.only(top: 20)),
-              // const Divider(),
-              ElevatedButton(
-                onPressed: () {
-                  _register().then((value) =>
-                  {
-                    if (value == true)
-                      {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) {
-                              return LoginPage();
-                            }))
-                      }
-                    else
-                      {
-                        showFailedDialog(
-                          "Register Failed",
-                          "Username could be taken, or your data is invalid. Please try again."
-                        )
-                      }
-                  });
-                },
-                style: ElevatedButton.styleFrom(primary: Colors.green),
-                child: const Text("Register"),
-              )
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                // const Divider(),
+                ElevatedButton(
+                  onPressed: () {
+                    _register().then((value) => {
+                          if (value == true)
+                            {
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return LoginPage();
+                              }))
+                            }
+                          else
+                            {
+                              showFailedDialog("Register Failed",
+                                  "Username could be taken, or your data is invalid. Please try again.")
+                            }
+                        });
+                  },
+                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  child: const Text("Register"),
+                )
+              ])),
             ],
           ),
         ),
@@ -120,8 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void showFailedDialog(String title, String content) {
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) =>
-            AlertDialog(
+        builder: (BuildContext context) => AlertDialog(
               title: Text(title),
               content: Text(content),
               actions: <Widget>[
