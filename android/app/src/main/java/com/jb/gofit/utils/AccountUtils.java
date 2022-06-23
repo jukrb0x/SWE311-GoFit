@@ -23,12 +23,27 @@ public class AccountUtils {
         return false;
     }
 
-    public Boolean register(String username, String password) {
+    public Boolean register(String username, String name, String email, String password) {
+        // username is unique
         UserDao userDao = db.userDao();
-        List<User> userList = userDao.checkUser(username, password);
-        for (User user : userList) {
-            return Objects.equals(user.password, password);
+        List<User> userList = userDao.checkUser(username);
+        if (!Objects.equals(userList.size(), 0)) {
+            // user exists
+            return false;
+        } else {
+            User newUser = new User(
+                    username,
+                    name,
+                    email,
+                    password,
+                    65.0,
+                    170.0,
+                    20,
+                    1
+            );
+            newUser.setWeightGoal(60);
+            userDao.insertAll(newUser);
+            return true;
         }
-        return false;
     }
 }

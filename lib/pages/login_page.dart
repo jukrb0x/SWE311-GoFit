@@ -1,5 +1,8 @@
+import 'package:GoFit/layout/container.dart';
 import 'package:GoFit/model/user_model.dart';
+import 'package:GoFit/pages/home_page.dart';
 import 'package:GoFit/pages/my_page.dart';
+import 'package:GoFit/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,23 +59,36 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(builder: (context) {
-                                  return MyPage();
+                                  // notify my fit reset
+                                  return ContainerWidget();
                                 }),
                               )
                             }
                           else
                             {
                               // login failed, pop up warning
+                              showFailedDialog(
+                                  "Login Failed",
+                                  "Please check your credentials."
+                              )
+
                             }
                         });
                   },
-                  child: Text("Login")),
-              Padding(padding: EdgeInsets.only(top: 20)),
-              Text("No account?"),
+                  child: const Text("Login")),
+              const Padding(padding: EdgeInsets.only(top: 20)),
+              const Text("No account?"),
               ElevatedButton(
-                onPressed: (){},
-                child: Text("Register"),
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return RegisterPage();
+                    }),
+                  );
+                },
                 style: ElevatedButton.styleFrom(primary: Colors.green),
+                child: Text("Register"),
               )
             ],
           ),
@@ -82,19 +98,35 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<bool> _login() async {
+    if(usernameController.text =="" || passwordController.text ==""){
+      print("empty");
+      return false;
+    }
     bool res;
     res = await Provider.of<UserModel>(context, listen: false)
         .login(usernameController.text, passwordController.text);
     return res;
   }
 
-  Future<bool> _register() async {
-    bool res;
-    res = await Provider.of<UserModel>(context, listen: false)
-        .register(usernameController.text, passwordController.text);
-    return res;
-  }
 
-  void showSnackBarLoginFailed(BuildContext context) {}
+  void showFailedDialog(String title, String content) {
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) =>
+            AlertDialog(
+              title: Text(title),
+              content: Text(content),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ));
+  }
 
 }

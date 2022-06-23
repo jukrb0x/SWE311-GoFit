@@ -29,24 +29,28 @@ class UserModel extends ChangeNotifier {
   Future<bool> login(String username, String password) async {
     username = username;
     password = password;
-    bool result = await platform.invokeMethod('login',
-        {'username':username,'password':password}
-    );
+    bool result = await platform
+        .invokeMethod('login', {'username': username, 'password': password});
     print('login: $username $password $result');
     isLogin = result;
     notifyListeners();
     return result;
   }
 
-  Future<bool> register(String username, String password) async {
+  Future<bool> register(
+      String username, String name, String email, String password) async {
     username = username;
     password = password;
-    bool result = await platform.invokeMethod('register',
-        {'username':username,'password':password}
-    );
+    email = email;
+    name = name;
+    bool result = await platform.invokeMethod('register', {
+      'username': username,
+      'name': name,
+      'email': email,
+      'password': password
+    });
     print('register: $username $password $result');
     notifyListeners();
     return result;
-
   }
 }

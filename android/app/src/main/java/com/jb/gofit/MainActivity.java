@@ -113,6 +113,14 @@ public class MainActivity extends FlutterActivity {
                                 Boolean res = Account.login(call.argument("username"), call.argument("password"));
                                 result.success(res);
                             }
+                            if (call.method.equals("register")) {
+                                Boolean res = Account.register(
+                                        call.argument("username"),
+                                        call.argument("name"),
+                                        call.argument("email"),
+                                        call.argument("password"));
+                                result.success(res);
+                            }
                         })
                 );
     }

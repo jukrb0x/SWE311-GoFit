@@ -1,6 +1,7 @@
 import 'package:GoFit/pages/login_page.dart';
 import 'package:GoFit/pages/home_page.dart';
 import 'package:GoFit/pages/my_page.dart';
+import 'package:GoFit/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
 class MyCenterPage extends StatefulWidget {
@@ -68,7 +69,7 @@ class _MyCenterPageState extends State<MyCenterPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
-                          return LoginPage();
+                          return RegisterPage();
                         }),
                       );
                     },

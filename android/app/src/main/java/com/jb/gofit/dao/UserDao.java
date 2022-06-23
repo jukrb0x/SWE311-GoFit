@@ -26,4 +26,8 @@ public interface UserDao {
 
     @Query("SELECT * FROM user WHERE username LIKE :username AND password LIKE :password")
     List<User> checkUser(String username, String password);
+
+    @Query("SELECT * FROM user WHERE username LIKE :username")
+    List<User> checkUser(String username);
+
 }
